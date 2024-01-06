@@ -2,30 +2,23 @@ import { useEffect } from "react";
 import usePriorityQueue from "../hooks/queueHook";
 
 type Props = {
-  name: string;
+  word: string;
   priority: number;
-  onLog: (msg: string) => void;
 };
 
-const Test = ({ name, priority, onLog: log }: Props) => {
-  const { isNext, done } = usePriorityQueue("TestQueue", priority);
+const Test = ({ word, priority }: Props) => {
+  const { isNext, done } = usePriorityQueue("TestQueue", priority, false);
 
   useEffect(() => {
     if (isNext) {
-      echoAsync(`hi from ${name}`).then(log).then(done);
+      const delay = Math.random() * 1000;
+      setTimeout(() => {
+        done();
+      }, delay);
     }
   }, [isNext]);
 
-  return <p>{name} is rendered!</p>;
+  return isNext ? <span>{`${word} `}</span> : null;
 };
-
-async function echoAsync(message: string): Promise<string> {
-  return new Promise((resolve, _) => {
-    const delay = Math.random() * 1000;
-    setTimeout(() => {
-      resolve(message + ` - processing time: ${delay}ms`);
-    }, delay);
-  });
-}
 
 export default Test;

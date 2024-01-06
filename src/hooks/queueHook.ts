@@ -50,7 +50,11 @@ function moveNextInQueue(queueName: string) {
   queue?.peek()?.resolve?.();
 }
 
-const usePriorityQueue = (queueName: string, priority: number) => {
+const usePriorityQueue = (
+  queueName: string,
+  priority: number,
+  revertStateWhenDone: boolean = true
+) => {
   const [isNext, setIsNext] = useState(false);
   const id = useRef<Symbol | null>(null);
 
@@ -63,7 +67,9 @@ const usePriorityQueue = (queueName: string, priority: number) => {
     const isTopOfQueue = isTopOfPriorityQueue(queueName, id.current);
     if (isTopOfQueue) {
       moveNextInQueue(queueName);
-      setIsNext(false);
+      if (revertStateWhenDone) {
+        setIsNext(false);
+      }
     } else {
       console.warn(`Your not ready yet! This is no-op.`);
     }

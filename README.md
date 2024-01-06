@@ -16,5 +16,6 @@ Note: the order of the rendering matters. If a component is the first to queue, 
 # Example:
 
 The test app in this repo renders a list of Test components.
-Each test component executes `echoAsync()` which simulates random delay in processing. `Test` component X is given priority X.
-When you run the example, the messages should be printed in the order of the priority.
+Each Test component displays a word in the writing on the Statue Of Liberty with random delay... just for fun!
+
+![Give me your tired your poor!](./test.gif)

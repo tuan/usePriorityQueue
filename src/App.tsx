@@ -1,24 +1,21 @@
-import { useState } from "react";
 import "./App.css";
 import Test from "./components/Test";
 
 function App() {
-  const [logs, setLogs] = useState<readonly string[]>([]);
-
-  function log(message: string) {
-    setLogs((previousLogs) => [...previousLogs, message]);
-  }
   return (
     <>
-      {[1, 2, 3, 4].map((i) => (
-        <Test key={i} name={`test ${i}`} priority={i} onLog={log}></Test>
+      {text.split(/\s+/).map((word, order) => (
+        <Test key={order} word={word} priority={order}></Test>
       ))}
-
-      {logs.map((log, index) => {
-        return <p key={index}> {log}</p>;
-      })}
     </>
   );
 }
 
+const text = `
+Give me your tired, your poor,
+Your huddled masses yearning to breathe free,
+The wretched refuse of your teeming shore.
+Send these, the homeless, tempest-tost to me,
+I lift my lamp beside the golden door!
+`;
 export default App;
